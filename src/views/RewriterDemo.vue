@@ -70,13 +70,6 @@
               </div>
               <USelect v-model="contentLength" :items="lengthOptions" :disabled="!isSupported" />
             </div>
-
-            <div class="space-y-4">
-              <div class="flex items-center gap-2">
-                <h3 class="font-medium">Style</h3>
-              </div>
-              <USelect v-model="writingStyle" :items="styleOptions" :disabled="!isSupported" />
-            </div>
           </div>
 
           <div class="space-y-4">
@@ -150,66 +143,33 @@ const toggleCodeCollapse = ref(false)
 const enableStreaming = ref(false)
 const transformationType = ref('more-formal')
 const outputFormat = ref('markdown')
-const contentLength = ref('medium')
-const writingStyle = ref('professional')
+const contentLength = ref('as-is')
 const additionalInstructions = ref('')
 
 const transformationOptions = [
   {
     label: 'More Formal',
     value: 'more-formal',
-    description: 'Make the text more formal and professional',
   },
   {
     label: 'More Casual',
     value: 'more-casual',
-    description: 'Make the text more casual and conversational',
   },
   {
-    label: 'More Creative',
-    value: 'more-creative',
-    description: 'Make the text more imaginative and engaging',
-  },
-  {
-    label: 'More Concise',
-    value: 'more-concise',
-    description: 'Make the text shorter while preserving meaning',
-  },
-  {
-    label: 'Longer',
-    value: 'longer',
-    description: 'Expand the text with more detail and explanation',
-  },
-  { label: 'Simpler', value: 'simpler', description: 'Use simpler language and shorter sentences' },
-  {
-    label: 'More Technical',
-    value: 'more-technical',
-    description: 'Use more technical and precise language',
-  },
-  {
-    label: 'More Accessible',
-    value: 'more-accessible',
-    description: 'Make the text easier to understand',
+    label: 'As Is',
+    value: 'as-is',
   },
 ]
 
 const formatOptions = [
-  { label: 'Markdown', value: 'markdown', description: 'Formatted markdown text' },
-  { label: 'Plain Text', value: 'plain-text', description: 'Standard unformatted text' },
+  { label: 'Markdown', value: 'markdown' },
+  { label: 'Plain Text', value: 'plain-text' },
 ]
 
 const lengthOptions = [
-  { label: 'Short', value: 'short', description: 'Concise version (preserve key points)' },
-  { label: 'Medium', value: 'medium', description: 'Balanced length (similar to original)' },
-  { label: 'Long', value: 'long', description: 'Expanded version (add detail)' },
-]
-
-const styleOptions = [
-  { label: 'Professional', value: 'professional', description: 'Formal, business-like tone' },
-  { label: 'Casual', value: 'casual', description: 'Informal, conversational tone' },
-  { label: 'Creative', value: 'creative', description: 'Imaginative, engaging tone' },
-  { label: 'Academic', value: 'academic', description: 'Scholarly, research-based tone' },
-  { label: 'Technical', value: 'technical', description: 'Precise, technical language' },
+  { label: 'Shorter', value: 'shorter' },
+  { label: 'As is', value: 'as-is' },
+  { label: 'Longer', value: 'longer' },
 ]
 
 const canProcess = computed(() => {
@@ -245,9 +205,6 @@ const generateExampleCode = computed(() => {
   }
   if (contentLength.value !== 'medium') {
     options.push(`length: '${contentLength.value}'`)
-  }
-  if (writingStyle.value !== 'professional') {
-    options.push(`style: '${writingStyle.value}'`)
   }
   if (additionalInstructions.value) {
     options.push(`instructions: '${additionalInstructions.value.replace(/'/g, "\\'")}'`)
@@ -365,7 +322,6 @@ async function rewriteText() {
       type: transformationType.value,
       format: outputFormat.value,
       length: contentLength.value,
-      style: writingStyle.value,
       instructions: additionalInstructions.value,
       signal: abortController.value.signal,
       monitor(m) {

@@ -137,26 +137,24 @@ const toggleCodeCollapse = ref(false)
 const enableStreaming = ref(false)
 const outputFormat = ref('markdown')
 const contentLength = ref('medium')
-const writingStyle = ref('professional')
+const writingStyle = ref('formal')
 const additionalContext = ref('')
 
 const formatOptions = [
-  { label: 'Markdown', value: 'markdown', description: 'Formatted markdown text' },
-  { label: 'Plain Text', value: 'plain-text', description: 'Standard unformatted text' },
+  { label: 'Markdown', value: 'markdown' },
+  { label: 'Plain Text', value: 'plain-text' },
 ]
 
 const lengthOptions = [
-  { label: 'Short', value: 'short', description: 'Concise content (1-2 paragraphs)' },
-  { label: 'Medium', value: 'medium', description: 'Balanced length (3-5 paragraphs)' },
-  { label: 'Long', value: 'long', description: 'Detailed content (6+ paragraphs)' },
+  { label: 'Short', value: 'short' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Long', value: 'long' },
 ]
 
 const styleOptions = [
-  { label: 'Professional', value: 'professional', description: 'Formal, business-like tone' },
-  { label: 'Casual', value: 'casual', description: 'Informal, conversational tone' },
-  { label: 'Creative', value: 'creative', description: 'Imaginative, engaging tone' },
-  { label: 'Academic', value: 'academic', description: 'Scholarly, research-based tone' },
-  { label: 'Technical', value: 'technical', description: 'Precise, technical language' },
+  { label: 'Formal', value: 'formal' },
+  { label: 'Casual', value: 'casual' },
+  { label: 'Neutral', value: 'neutral' },
 ]
 
 const canProcess = computed(() => {
@@ -190,7 +188,7 @@ const generateExampleCode = computed(() => {
   if (contentLength.value !== 'medium') {
     options.push(`length: '${contentLength.value}'`)
   }
-  if (writingStyle.value !== 'professional') {
+  if (writingStyle.value !== 'formal') {
     options.push(`style: '${writingStyle.value}'`)
   }
   if (additionalContext.value) {
@@ -308,7 +306,7 @@ async function generateContent() {
     const options = {
       format: outputFormat.value,
       length: contentLength.value,
-      style: writingStyle.value,
+      tone: writingStyle.value,
       context: additionalContext.value,
       signal: abortController.value.signal,
       monitor(m) {

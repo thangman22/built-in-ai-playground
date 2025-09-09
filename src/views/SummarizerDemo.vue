@@ -135,54 +135,26 @@ const summaryTypes = [
   {
     label: 'Key Points',
     value: 'key-points',
-    description: 'Extract important points as bullet points (3-7 points based on length)',
   },
   {
     label: 'TL;DR',
     value: 'tldr',
-    description: 'Quick overview summary (1-5 sentences based on length)',
   },
   {
     label: 'Teaser',
     value: 'teaser',
-    description: 'Intriguing summary to draw readers in (1-5 sentences based on length)',
-  },
-  {
-    label: 'Headline',
-    value: 'headline',
-    description: 'Main point in a single sentence (12-22 words based on length)',
-  },
-  {
-    label: 'Executive Summary',
-    value: 'executive',
-    description: 'Business-focused summary with key insights and recommendations',
-  },
-  {
-    label: 'Academic Abstract',
-    value: 'academic',
-    description: 'Scholarly summary with methodology and findings',
-  },
-  {
-    label: 'News Summary',
-    value: 'news',
-    description: 'Journalistic summary with who, what, when, where, why',
-  },
-  {
-    label: 'Technical Summary',
-    value: 'technical',
-    description: 'Technical overview with key concepts and implementation details',
   },
 ]
 
 const formatOptions = [
-  { label: 'Markdown', value: 'markdown', description: 'Formatted markdown text' },
-  { label: 'Plain Text', value: 'plain-text', description: 'Standard unformatted text' },
+  { label: 'Markdown', value: 'markdown' },
+  { label: 'Plain Text', value: 'plain-text' },
 ]
 
 const lengthOptions = [
-  { label: 'Short', value: 'short', description: 'Concise summary' },
-  { label: 'Medium', value: 'medium', description: 'Balanced length (default)' },
-  { label: 'Long', value: 'long', description: 'Detailed summary' },
+  { label: 'Short', value: 'short' },
+  { label: 'Medium', value: 'medium' },
+  { label: 'Long', value: 'long' },
 ]
 
 const canProcess = computed(() => {
